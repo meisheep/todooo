@@ -1,59 +1,47 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import TodoList from './TodoList';
 import axios from 'axios';
 import './App.scss';
 
-class App extends Component {
-  state = {
-    items: [],
-    input: '',
-  };
+const App = () => {
+  const [items, setItems] = useState([]);
+  const [input, setInput] = useState('');
 
-  componentDidMount() {
-    this.fetchAllTodo();
-  }
-
-  fetchAllTodo = async () => {
+  const fetchAllTodo = async () => {
     const response = await axios.get('http://localhost:8000/api/todo');
-    this.setState({
-      items: response.data,
-    });
+    setItems(response.data);
   };
 
-  onInputChange = (evt) => {
-    this.setState({
-      input: evt.target.value,
-    });
-  };
+  // componentDidMount
+  useEffect(() => {
+    fetchAllTodo();
+  }, []);
 
-  onSubmit = async () => {
-    const { input } = this.state;
+  const onSubmit = async () => {
+    setInput('');
     await axios.post('http://localhost:8000/api/todo', {
       val: input,
     });
-    await this.fetchAllTodo();
+    fetchAllTodo();
   };
 
-  onDelete = async (pk) => {
+  const onDelete = async (pk) => {
     await axios.delete(`http://localhost:8000/api/todo/${pk}`);
-    await this.fetchAllTodo();
+    fetchAllTodo();
   };
 
-  render() {
-    const { items, input } = this.state;
-    return (
-      <div className="App">
-        <h1>Todooo</h1>
-        <p>Todooo is a simple todo list written with React.</p>
-        <input onChange={this.onInputChange} value={input} />
-        <button type="button" onClick={this.onSubmit}>Submit</button>
-        <TodoList
-          items={items}
-          onDelete={this.onDelete}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="App">
+      <h1>Todooo</h1>
+      <p>Todooo is a simple todo list written with React.</p>
+      <input onChange={(evt) => setInput(evt.target.value)} value={input} />
+      <button type="button" onClick={onSubmit}>Submit</button>
+      <TodoList
+        items={items}
+        onDelete={onDelete}
+      />
+    </div>
+  );
+};
 
 export default App;
