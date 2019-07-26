@@ -3,6 +3,23 @@ import TodoList from './TodoList';
 import './App.scss';
 
 class App extends Component {
+  state = {
+    items: [
+      {
+        pk: 0,
+        val: 'Coffee',
+      },
+      {
+        pk: 1,
+        val: 'Tea',
+      },
+      {
+        pk: 2,
+        val: 'Milk',
+      },
+    ],
+  };
+
   render() {
     return (
       <div className="App">
@@ -10,7 +27,7 @@ class App extends Component {
         <p>Todooo is a simple todo list written with React.</p>
         <input />
         <button type="button">Submit</button>
-        <TodoList />
+        <TodoList items={this.state.items} />
       </div>
     );
   }

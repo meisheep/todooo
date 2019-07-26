@@ -1,20 +1,18 @@
 import React from 'react';
 
-const TodoList = () => (
-  <ul>
-    <li>
-      Coffee
+const TodoList = (props) => {
+  const { items } = props;
+  const todoListItems = items.map((item) => (
+    <li key={item.pk}>
+      {item.val}
       <button type="button">Delete</button>
     </li>
-    <li>
-      Tea
-      <button type="button">Delete</button>
-    </li>
-    <li>
-      Milk
-      <button type="button">Delete</button>
-    </li>
-  </ul>
-);
+  ));
+  return (
+    <ul>
+      {todoListItems}
+    </ul>
+  );
+};
 
 export default TodoList;
