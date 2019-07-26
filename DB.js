@@ -4,7 +4,7 @@ class DB {
   create = (val) => this.db.push({ pk: this.db.length, val });
   read = (pk) => this.db[pk];
   update = (pk, val) => this.db[pk] = { pk, val };
-  delete = (pk) => this.db.splice(pk - 1, 1);
+  delete = (pk) => this.db = this.db.filter(item => item.pk !== pk);
 }
 
 module.exports = DB;
