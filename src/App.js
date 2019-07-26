@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TodoList from './TodoList';
+import axios from 'axios';
 import './App.scss';
 
 class App extends Component {
@@ -8,31 +9,34 @@ class App extends Component {
     input: '',
   };
 
+  componentDidMount() {
+    this.fetchAllTodo();
+  }
+
+  fetchAllTodo = async () => {
+    const response = await axios.get('http://localhost:8000/api/todo');
+    this.setState({
+      items: response.data,
+    });
+  };
+
   onInputChange = (evt) => {
     this.setState({
       input: evt.target.value,
     });
   };
 
-  onSubmit = () => {
-    const { items, input } = this.state;
-    const newItem = {
-      "pk": items.length,
-      "val": input,
-    };
-    this.setState({
-      items: [...items, newItem],
-      input: '',
+  onSubmit = async () => {
+    const { input } = this.state;
+    await axios.post('http://localhost:8000/api/todo', {
+      val: input,
     });
+    await this.fetchAllTodo();
   };
 
-  onDelete = (pk) => {
-    const { items } = this.state;
-    const newItems = [...items];
-    newItems.splice(pk - 1, 1);
-    this.setState({
-      items: newItems,
-    });
+  onDelete = async (pk) => {
+    await axios.delete(`http://localhost:8000/api/todo/${pk}`);
+    await this.fetchAllTodo();
   };
 
   render() {

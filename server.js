@@ -3,6 +3,7 @@ const Koa = require('koa');
 const logger = require('koa-logger');
 const bodyParser = require('koa-bodyparser');
 const json = require('koa-json')
+const cors = require('@koa/cors');
 const Router = require('@koa/router');
 
 const app = new Koa();
@@ -51,6 +52,7 @@ app
   .use(logger())
   .use(bodyParser())
   .use(json())
+  .use(cors())
   .use(router.routes())
   .use(router.allowedMethods());
 app.listen(8000);
