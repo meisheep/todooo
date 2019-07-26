@@ -4,30 +4,49 @@ import './App.scss';
 
 class App extends Component {
   state = {
-    items: [
-      {
-        pk: 0,
-        val: 'Coffee',
-      },
-      {
-        pk: 1,
-        val: 'Tea',
-      },
-      {
-        pk: 2,
-        val: 'Milk',
-      },
-    ],
+    items: [],
+    input: '',
+  };
+
+  onInputChange = (evt) => {
+    this.setState({
+      input: evt.target.value,
+    });
+  };
+
+  onSubmit = () => {
+    const { items, input } = this.state;
+    const newItem = {
+      "pk": items.length,
+      "val": input,
+    };
+    this.setState({
+      items: [...items, newItem],
+      input: '',
+    });
+  };
+
+  onDelete = (pk) => {
+    const { items } = this.state;
+    const newItems = [...items];
+    newItems.splice(pk - 1, 1);
+    this.setState({
+      items: newItems,
+    });
   };
 
   render() {
+    const { items, input } = this.state;
     return (
       <div className="App">
         <h1>Todooo</h1>
         <p>Todooo is a simple todo list written with React.</p>
-        <input />
-        <button type="button">Submit</button>
-        <TodoList items={this.state.items} />
+        <input onChange={this.onInputChange} value={input} />
+        <button type="button" onClick={this.onSubmit}>Submit</button>
+        <TodoList
+          items={items}
+          onDelete={this.onDelete}
+        />
       </div>
     );
   }
