@@ -10,14 +10,12 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.fetchAllTodo();
+    // fetct data in componentDidMount
   }
 
   fetchAllTodo = async () => {
     const response = await axios.get('http://localhost:8000/api/todo');
-    this.setState({
-      items: response.data,
-    });
+    // update state
   };
 
   onInputChange = (evt) => {
@@ -27,16 +25,13 @@ class App extends Component {
   };
 
   onSubmit = async () => {
-    const { input } = this.state;
-    await axios.post('http://localhost:8000/api/todo', {
-      val: input,
-    });
-    await this.fetchAllTodo();
+    // 1. post new todo
+    // 2. fetch all items and update
   };
 
   onDelete = async (pk) => {
-    await axios.delete(`http://localhost:8000/api/todo/${pk}`);
-    await this.fetchAllTodo();
+    // 1. delete todo with pk
+    // 2. fetch all items and update
   };
 
   render() {
