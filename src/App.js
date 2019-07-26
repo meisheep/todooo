@@ -27,7 +27,7 @@ class App extends Component {
         <p>Todooo is a simple todo list written with React.</p>
         <input />
         <button type="button">Submit</button>
-        <TodoList items={this.state.items} />
+        <TodoList />
       </div>
     );
   }

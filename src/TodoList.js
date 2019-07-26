@@ -1,16 +1,8 @@
 import React from 'react';
 
 const TodoList = (props) => {
-  const { items } = props;
-  const todoListItems = items.map((item) => (
-    <li key={item.pk}>
-      {item.val}
-      <button type="button">Delete</button>
-    </li>
-  ));
   return (
     <ul>
-      {todoListItems}
     </ul>
   );
 };
