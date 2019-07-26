@@ -10,7 +10,20 @@ class App extends Component {
         <p>Todooo is a simple todo list written with React.</p>
         <input />
         <button type="button">Submit</button>
-        <TodoList />
+        <ul>
+          <li>
+            Coffee
+            <button type="button">Delete</button>
+          </li>
+          <li>
+            Tea
+            <button type="button">Delete</button>
+          </li>
+          <li>
+            Milk
+            <button type="button">Delete</button>
+          </li>
+        </ul>
       </div>
     );
   }
