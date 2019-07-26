@@ -1,3 +1,27 @@
+# Todooo
+Todooo is a crazy simple Todo APP. This repo is for a private React training workshop.
+
+## Environments
+- NodeJS > 12.7.0
+
+## How to run dev mode?
+```
+yarn dev
+```
+
+## Topics
+You can find corresponding branch of following topics.
+- stage0: app mounting
+- stage1: jsx
+- stage2: react components
+- stage3: state & props
+- stage4: event handler & data binding
+- stage5: component lifecycle & API binding
+
+## Bonus Topic
+- React Hook in `master` branch
+
+## Appendix
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
