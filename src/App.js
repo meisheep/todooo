@@ -9,28 +9,16 @@ class App extends Component {
   };
 
   onInputChange = (evt) => {
-    this.setState({
-      input: evt.target.value,
-    });
+    // how to get new value? => evt.target.value;
+    // this.setState
   };
 
   onSubmit = () => {
-    const { items, input } = this.state;
-    const newItem = {
-      "pk": items.length,
-      "val": input,
-    };
-    this.setState({
-      items: [...items, newItem],
-      input: '',
-    });
+    // remember cloning a new array, don't directly manipulate array in state
   };
 
   onDelete = (pk) => {
-    const { items } = this.state;
-    this.setState({
-      items: [...items].filter(item => item.pk !== pk),
-    });
+    // you can use `filter` to remove item in array
   };
 
   render() {
@@ -39,12 +27,9 @@ class App extends Component {
       <div className="App">
         <h1>Todooo</h1>
         <p>Todooo is a simple todo list written with React.</p>
-        <input onChange={this.onInputChange} value={input} />
-        <button type="button" onClick={this.onSubmit}>Submit</button>
-        <TodoList
-          items={items}
-          onDelete={this.onDelete}
-        />
+        <input />
+        <button type="button">Submit</button>
+        <TodoList items={items} />
       </div>
     );
   }
